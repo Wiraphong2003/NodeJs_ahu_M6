@@ -15,7 +15,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(function (req, res, next) {
    res.header('Access-Control-Allow-Origin', "*");
-   // res.header('Access-Control-Allow-Origin', "http://localhost:4200");
    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
    res.header('Access-Control-Allow-Headers', "Content-Type");
    next();
@@ -67,6 +66,9 @@ app.post("/login", async (req, res) => {
       if (!(username && password)) {
          res.status(400).send("All input is requiresd");
       }
+
+      // const salt = await bcrypt.genSaltSync(10);
+      // const password = await req.body.password;
 
       const user = await User.findOne({ username });
 
