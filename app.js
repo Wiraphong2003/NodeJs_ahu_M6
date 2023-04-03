@@ -67,12 +67,9 @@ app.post("/login", async (req, res) => {
          res.status(400).send("All input is requiresd");
       }
 
-      // const salt = await bcrypt.genSaltSync(10);
-      // const password = await req.body.password;
-
       const user = await User.findOne({ username });
 
-      if (user && (await bcrypt.compare(password, user.password))) {
+      if (user && bcrypt.compare(password, user.password)) {
 
          const token = jwt.sign(
             { user_id: user._id, username },
